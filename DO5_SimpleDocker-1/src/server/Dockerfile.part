@@ -1,0 +1,8 @@
+FROM nginx
+WORKDIR /home/
+COPY /server/nginx.conf /etc/nginx/nginx.conf
+COPY /server/server.c .
+COPY docker.sh . 
+RUN apt-get update
+RUN apt-get install -y gcc spawn-fcgi libfcgi-dev
+ENTRYPOINT [ "sh", "./docker.sh"]
